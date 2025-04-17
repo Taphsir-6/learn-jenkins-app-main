@@ -1,17 +1,15 @@
-pipeline{
-    agent any
-
+pipeline {
     agent {
         docker {
             image 'node:18-alpine'
-            args '-v /c/ProgramData/Jenkins/.jenkins/workspace/learn-jenkins-app:/workspace'
+            args '-v C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\learn-jenkins-app:/workspace'
         }
     }
     stages {
         stage('Build') {
             steps {
-                sh 'npm install'
-                sh 'npm run build'
+                bat 'npm install'
+                bat 'npm run build'
             }
         }
     }
