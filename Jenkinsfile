@@ -1,31 +1,18 @@
 pipeline{
     agent any
 
-    stages{
-        stage("Build"){
-            agent{
-                docker{
-                    image 'node:18-alpine'
-                    reuseNode true
-                }
-            }
-            steps{
-                sh '''
-                    ls -la
-                    node --version
-                    npm --version
-                    npm ci
-                    npm run build
-                    ls -la
-                '''
+    agent {
+        docker {
+            image 'node:18-alpine'
+            args '-v /c/ProgramData/Jenkins/.jenkins/workspace/learn-jenkins-app:/workspace'
+        }
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'npm install'
+                sh 'npm run build'
             }
         }
-
-        
-
-        
-        
-
-
     }
 }
